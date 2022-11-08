@@ -18,7 +18,7 @@ def generate_flipbook(working_directory, images_folder, output_name="flipbook", 
     img_len = batch.common_size[0]
 
     atlas = Image.new(
-        "RGB", (atlas_len * img_len, atlas_len * img_len))
+        "RGBA", (atlas_len * img_len, atlas_len * img_len))
 
     idx = 0
 
