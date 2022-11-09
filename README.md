@@ -1,1 +1,3 @@
-# img_utils
+# bim
+
+**B**atch **IM**ages utilities.
