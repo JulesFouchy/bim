@@ -8,8 +8,8 @@ def generate_flipbook(working_directory, images_folder, output_name="flipbook", 
     import os
     import math
     from PIL import Image
-    from img_utils import unique_file_name
-    from img_utils import ImageBatch
+    from bim import unique_file_name
+    from bim import ImageBatch
 
     batch = ImageBatch(os.path.join(working_directory, images_folder))
 

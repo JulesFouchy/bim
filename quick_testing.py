@@ -1,5 +1,5 @@
-import img_utils
+import bim
 import os
 
-batch = img_utils.ImageBatch("img")
+batch = bim.ImageBatch("img")
 print(batch.images)
