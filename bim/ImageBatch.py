@@ -49,3 +49,6 @@ class ImageBatch:
 
             except(PIL.UnidentifiedImageError):  # This was not an image file, no problem
                 continue
+
+    def __iter__(self):
+        return self.images.__iter__()

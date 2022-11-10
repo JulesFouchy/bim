@@ -48,7 +48,7 @@ def generate_flipbook(
 
     idx = 0
 
-    for img in batch.images:
+    for img in batch:
         x = idx % atlas_len
         y = idx // atlas_len
         x = flip_if(lr_dir == LRDirection.RIGHT_TO_lEFT, x, atlas_len)
