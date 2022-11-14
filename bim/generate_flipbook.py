@@ -37,6 +37,8 @@ def generate_flipbook(
     from . import unique_file_name
     from . import ImageBatch
 
+    Image.MAX_IMAGE_PIXELS = 933120000
+
     batch = ImageBatch(os.path.join(working_directory, images_folder))
 
     nb_imgs = len(batch.images)
