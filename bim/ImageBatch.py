@@ -1,3 +1,6 @@
+from collections.abc import Iterator
+from PIL import Image
+from typing import List
 
 
 class MismatchedImageSizes(Exception):
@@ -14,12 +17,11 @@ class MismatchedImageExtensions(Exception):
 
 class ImageBatch:
     def __init__(self, images_dir):
-        import PIL
-        from PIL import Image
         import os
         from pathlib import Path
+        import PIL
 
-        self.images = []
+        self.images: List[Image.Image] = []
         self.common_size = None
         self.common_extension = None
 
@@ -45,10 +47,11 @@ class ImageBatch:
                 self.common_extension = ext
 
                 # Add image
+                img.name = Path(file).name
                 self.images.append(img)
 
             except(PIL.UnidentifiedImageError):  # This was not an image file, no problem
                 continue
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[Image.Image]:
         return self.images.__iter__()
