@@ -41,7 +41,7 @@ def generate_flipbook(
 
     batch = ImageBatch(os.path.join(working_directory, images_folder))
 
-    nb_imgs = len(batch.images)
+    nb_imgs = len(batch)
     atlas_len = math.ceil(math.sqrt(nb_imgs))
     img_len = batch.common_size[0]
 

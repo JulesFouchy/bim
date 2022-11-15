@@ -15,15 +15,31 @@ class MismatchedImageExtensions(Exception):
         super().__init__(self.message)
 
 
+class ImageFolderIterator:
+    def __init__(self, images_dir):
+        import os
+        self.dir_iterator = iter(os.listdir(images_dir))
+        self.images_dir = images_dir
+
+    def __next__(self):
+        from PIL import Image
+        import os
+
+        file = next(self.dir_iterator)
+        img = Image.open(os.path.join(self.images_dir, file))
+        img.name = file
+        return img
+
+
 class ImageBatch:
     def __init__(self, images_dir):
         import os
         from pathlib import Path
         import PIL
 
-        self.images: List[Image.Image] = []
         self.common_size = None
         self.common_extension = None
+        self.images_dir = images_dir
 
         for filename in os.listdir(images_dir):
             file = os.path.join(images_dir, filename)
@@ -46,12 +62,12 @@ class ImageBatch:
                         Path(file).name, ext, self.common_extension)
                 self.common_extension = ext
 
-                # Add image
-                img.name = Path(file).name
-                self.images.append(img)
-
             except(PIL.UnidentifiedImageError):  # This was not an image file, no problem
                 continue
 
     def __iter__(self) -> Iterator[Image.Image]:
-        return self.images.__iter__()
+        return ImageFolderIterator(self.images_dir)
+
+    def __len__(self) -> int:
+        import os
+        return len(os.listdir(self.images_dir))
